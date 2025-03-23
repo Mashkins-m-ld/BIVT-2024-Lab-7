@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Lab_6.Purple_1;
+using static Lab_7.Purple_1;
 
-namespace Lab_6
+namespace Lab_7
 {
     public class Purple_1 //обязательно публичный класс при выполнении заданий 
     {

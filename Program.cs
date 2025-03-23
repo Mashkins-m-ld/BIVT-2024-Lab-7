@@ -1,12 +1,12 @@
-﻿using Lab_6;
+﻿using Lab_7;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static Lab_6.Purple_4;
-using static Lab_6.Purple_5;
+using static Lab_7.Purple_4;
+using static Lab_7.Purple_5;
 
 namespace Lab_7
 {
@@ -256,8 +256,6 @@ namespace Lab_7
                 Console.Write($"{answer[i].Item1} {answer[i].Item2}");
                 Console.WriteLine();
             }
-
-
 
         }
     }

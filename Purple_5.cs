@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
-using static Lab_6.Purple_5;
+using static Lab_7.Purple_5;
 
-namespace Lab_6
+namespace Lab_7
 {
     public class Purple_5
     {

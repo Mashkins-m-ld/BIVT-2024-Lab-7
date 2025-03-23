@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Lab_6.Purple_4;
+using static Lab_7.Purple_4;
 
-namespace Lab_6
+namespace Lab_7
 {
     public class Purple_4
     {
