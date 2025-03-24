@@ -30,6 +30,8 @@ namespace Lab_7
             {
                 get
                 {
+                    if (_answers == null) return null;
+
                     string[] copy = new string[_answers.Length];
                     Array.Copy(_answers, copy, _answers.Length);
                     return copy;
@@ -91,7 +93,7 @@ namespace Lab_7
 
             public Research MakeResearch()
             {
-                if (_researches == null)
+                if (_researches == null || _researchId<1)
                 {
                     Research problem = new Research("Хьюстон, у нас проблемы");
                     return problem;

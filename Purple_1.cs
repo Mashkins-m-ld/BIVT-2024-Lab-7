@@ -112,6 +112,8 @@ namespace Lab_7
 
             public static void Sort(Participant[] array)
             {
+                if (array == null) return;
+
                 for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int j = 0; j < array.Length - i - 1; j++)
@@ -141,14 +143,22 @@ namespace Lab_7
             //конструктор 
             public Judge(string name, int[] marks)
             {
+                if (marks == null) return;
+
                 _name = name;
-                _marks = marks;
+
+                _marks = new double[marks.Length];
+                for (int i = 0; i < marks.Length; i++)
+                {
+                    _marks[i] = marks[i];
+                }
             }
 
             //методы
             public int CreateMark()
             {
                 if (_marks == null) return 0;
+
                 _markCounter++;
                 return _marks[(_markCounter-1)%_marks.Length];
             }
@@ -178,7 +188,13 @@ namespace Lab_7
             //конструктор 
             public Competition(Judge[] judges)
             {
-                _judges = judges;
+                if (judjes == null) return;
+
+                _judges = new double[judges.Length];
+                for (int i = 0; i < judges.Length; i++)
+                {
+                    _judges[i]= judges[i];
+                }
                 _participants = new Participant[0];
             }
 
@@ -188,6 +204,7 @@ namespace Lab_7
                 if (_judges == null) return;
 
                 int[] marks = new int[Judges.Length];
+
                 for (int i = 0; i< Judges.Length; i++)
                 {
                     marks[i] = Judges[i].CreateMark();
@@ -226,6 +243,8 @@ namespace Lab_7
 
             public void Sort()
             {
+                if (_participants == null) return;
+
                 Participant.Sort(_participants);
                 
             }

@@ -176,7 +176,14 @@ namespace Lab_7
             //конструктор 
             public Skating(double[] moods)
             {
-                _moods = moods;
+                if (moods == null) return;
+
+                _moods = new double[moods.Length];
+                for (int i = 0; i < _moods.Length; i++)
+                {
+                    _moods[i] = moods[i];
+                }
+
                 _participants = new Participant[0];
                 ModificateMood();
 
@@ -188,14 +195,13 @@ namespace Lab_7
 
             public void Evaluate(double[] marks)
             {
-                if (_participants == null || _moods.Length!=7) return;
+                if (_participants == null || _moods.Length!=7 || marks==null) return;
                 for (int i = 0; i< marks.Length; i++)
                 {
-                    _participants[_skaterCounter++].Evaluate(marks[i] * _moods[i]);
+                    _participants[_skaterCounter].Evaluate(marks[i] * _moods[i]);
 
                 }
                 _skaterCounter++;
-                
 
             }
 
@@ -234,7 +240,8 @@ namespace Lab_7
 
                 for (int i = 0; i < _moods.Length; i++)
                 {
-                    _moods[i] += (i + 1) / 10;
+                    _moods[i] += (double)(i + 1) / 10;
+
                 }
             }
         }
@@ -251,7 +258,7 @@ namespace Lab_7
 
                 for (int i = 0; i < _moods.Length; i++)
                 {
-                    _moods[i] *= (1 + i / 100);
+                    _moods[i] *= (1 + (double)(i+1) / 100);
                 }
             }
         }

@@ -65,7 +65,7 @@ namespace Lab_7
                 Array.Sort(copy);
                 _result += (copy.Sum() - copy[0] - copy[copy.Length - 1]);
                 _result += 60;
-                if (_distance > target) _result += (_distance - target) * 2;
+                if (_distance >= target) _result += (_distance - target) * 2;
                 else
                 {
                     if (_result - (target - _distance) * 2 < 0) _result = 0;
@@ -79,6 +79,8 @@ namespace Lab_7
 
             public static void Sort(Participant[] array)
             {
+                if (array == null) return;
+
                 for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int j = 0; j < array.Length - 1 - i; j++)
@@ -151,7 +153,7 @@ namespace Lab_7
 
             public void Jump(int distanse, int[] marks)
             {
-                if (_participants == null) return;
+                if (_participants == null || marks==null) return;
 
                 _participants[_jumperCount].Jump(distanse, marks, _standart);
                 _jumperCount++;
