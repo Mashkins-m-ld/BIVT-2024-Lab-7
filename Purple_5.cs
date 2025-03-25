@@ -95,8 +95,7 @@ namespace Lab_7
             {
                 if (_researches == null || _researchId<1)
                 {
-                    Research problem = new Research("Хьюстон, у нас проблемы");
-                    return problem;
+                    return default(Research);
                 }
 
                 Research newResearch = new Research($"No_{_researchId}_{DateTime.Now.Month}/{DateTime.Now.Year}");
