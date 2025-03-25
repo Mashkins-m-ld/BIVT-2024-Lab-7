@@ -109,21 +109,21 @@ namespace Lab_7
         {
             //поля
             private string _name;
-            private int _standart;
+            private int _standard;
             private Participant[] _participants;
 
             private int _jumperCount;
 
             //свойства 
             public string Name => _name;
-            public int Standart => _standart;
+            public int Standard => _standard;
             public Participant[] Participants => _participants;
 
             //констуктор 
             public SkiJumping(string name, int standart)
             {
                 _name = name;
-                _standart = standart;
+                _standard = standart;
 
                 _participants = new Participant[0];
 
@@ -155,14 +155,14 @@ namespace Lab_7
             {
                 if (_participants == null || marks==null) return;
 
-                _participants[_jumperCount].Jump(distanse, marks, _standart);
+                _participants[_jumperCount].Jump(distanse, marks, _standard);
                 _jumperCount++;
             }
 
             public void Print()
             {
                 Console.WriteLine(Name);
-                Console.WriteLine(Standart);
+                Console.WriteLine(Standard);
                 foreach (Participant participant in Participants)
                 { 
                     participant.Print();

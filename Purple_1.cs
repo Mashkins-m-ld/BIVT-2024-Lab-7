@@ -104,7 +104,7 @@ namespace Lab_7
 
             public void Print()
             {
-                Console.Write($"Name");
+                Console.Write($"{Name}");
                 Console.Write($" {Surname}");
                 Console.Write($" {TotalScore}");
                 Console.WriteLine();
@@ -147,7 +147,7 @@ namespace Lab_7
 
                 _name = name;
 
-                _marks = new double[marks.Length];
+                _marks = new int[marks.Length];
                 for (int i = 0; i < marks.Length; i++)
                 {
                     _marks[i] = marks[i];
@@ -160,7 +160,7 @@ namespace Lab_7
                 if (_marks == null) return 0;
 
                 _markCounter++;
-                return _marks[(_markCounter-1)%_marks.Length];
+                return _marks[(_markCounter - 1) % _marks.Length];
             }
 
             public void Print()
@@ -188,12 +188,12 @@ namespace Lab_7
             //конструктор 
             public Competition(Judge[] judges)
             {
-                if (judjes == null) return;
+                if (judges == null) return;
 
-                _judges = new double[judges.Length];
+                _judges = new Judge[judges.Length];
                 for (int i = 0; i < judges.Length; i++)
                 {
-                    _judges[i]= judges[i];
+                    _judges[i] = judges[i];
                 }
                 _participants = new Participant[0];
             }
@@ -205,7 +205,7 @@ namespace Lab_7
 
                 int[] marks = new int[Judges.Length];
 
-                for (int i = 0; i< Judges.Length; i++)
+                for (int i = 0; i < Judges.Length; i++)
                 {
                     marks[i] = Judges[i].CreateMark();
                 }
@@ -227,7 +227,7 @@ namespace Lab_7
 
             public void Add(Participant[] participants)
             {
-                if (_participants == null || participants==null) return;
+                if (_participants == null || participants == null) return;
 
                 for (int j = 0; j < participants.Length; j++)
                 {
@@ -246,7 +246,7 @@ namespace Lab_7
                 if (_participants == null) return;
 
                 Participant.Sort(_participants);
-                
+
             }
         }
     }
