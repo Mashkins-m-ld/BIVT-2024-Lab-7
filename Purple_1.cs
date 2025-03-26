@@ -76,28 +76,32 @@ namespace Lab_7
             public void SetCriterias(double[] coefs)
             {
                 if (coefs == null || _coefs == null) return;
+
                 for (int i = 0; i < 4; i++)
                 {
                     if (coefs[i] < 2.5 || coefs[i] > 3.5) return;
                     _coefs[i] = coefs[i];
                 }
+
             }
 
             public void Jump(int[] marks)
             {
                 if (marks == null || _marks == null) return;
+
                 for (int i = 0; i < 7; i++)
                 {
                     _marks[_jump, i] = marks[i];
                 }
 
                 int[] copy = new int[7];
+
                 for (int i = 0; i < copy.Length; i++)
                 {
                     copy[i] = marks[i];
                 }
                 Array.Sort(copy);
-                _totalscore += (copy.Sum() - copy[0] - copy[6]) * _coefs[_jump];
+                _totalscore += (copy.Sum() - copy[0] - copy[copy.Length - 1]) * _coefs[_jump];
 
                 _jump += 1;
             }
@@ -148,19 +152,22 @@ namespace Lab_7
                 _name = name;
 
                 _marks = new int[marks.Length];
+
                 for (int i = 0; i < marks.Length; i++)
                 {
                     _marks[i] = marks[i];
                 }
+
+                _markCounter = 0;
             }
 
             //методы
             public int CreateMark()
             {
                 if (_marks == null) return 0;
-
+                int result = _marks[_markCounter % _marks.Length];
                 _markCounter++;
-                return _marks[(_markCounter - 1) % _marks.Length];
+                return result;
             }
 
             public void Print()
@@ -190,8 +197,9 @@ namespace Lab_7
             {
                 if (judges == null) return;
 
-                _judges = new Judge[judges.Length];
-                for (int i = 0; i < judges.Length; i++)
+                _judges = new Judge[7];
+
+                for (int i = 0; i < _judges.Length; i++)
                 {
                     _judges[i] = judges[i];
                 }
@@ -203,11 +211,11 @@ namespace Lab_7
             {
                 if (_judges == null) return;
 
-                int[] marks = new int[Judges.Length];
+                int[] marks = new int[_judges.Length];
 
-                for (int i = 0; i < Judges.Length; i++)
+                for (int i = 0; i < _judges.Length; i++)
                 {
-                    marks[i] = Judges[i].CreateMark();
+                    marks[i] = _judges[i].CreateMark();
                 }
                 jumper.Jump(marks);
             }
@@ -216,10 +224,7 @@ namespace Lab_7
             {
                 if (_participants == null) return;
 
-                for (int i = 0; i < participant.Marks.GetLength(0); i++)
-                {
-                    this.Evaluate(participant);
-                }
+                this.Evaluate(participant);
 
                 Array.Resize(ref _participants, _participants.Length + 1);
                 _participants[_participants.Length - 1] = participant;
@@ -231,10 +236,7 @@ namespace Lab_7
 
                 for (int j = 0; j < participants.Length; j++)
                 {
-                    for (int i = 0; i < participants[j].Marks.GetLength(0); i++)
-                    {
-                        this.Evaluate(participants[j]);
-                    }
+                    this.Evaluate(participants[j]);
 
                     Array.Resize(ref _participants, _participants.Length + 1);
                     _participants[_participants.Length - 1] = participants[j];

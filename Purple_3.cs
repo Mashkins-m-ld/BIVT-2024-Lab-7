@@ -178,7 +178,7 @@ namespace Lab_7
             {
                 if (moods == null) return;
 
-                _moods = new double[moods.Length];
+                _moods = new double[7];
                 for (int i = 0; i < _moods.Length; i++)
                 {
                     _moods[i] = moods[i];
@@ -196,7 +196,7 @@ namespace Lab_7
             public void Evaluate(double[] marks)
             {
                 if (_participants == null || _moods.Length!=7 || marks==null) return;
-                for (int i = 0; i< marks.Length; i++)
+                for (int i = 0; i< 7; i++)
                 {
                     _participants[_skaterCounter].Evaluate(marks[i] * _moods[i]);
 

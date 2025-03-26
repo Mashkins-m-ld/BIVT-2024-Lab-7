@@ -55,6 +55,7 @@ namespace Lab_7
             {
                 if (_marks == null || marks == null) return;
                 _distance = distance;
+
                 for (int i = 0; i < _marks.Length; i++)
                 {
                     _marks[i] = marks[i];

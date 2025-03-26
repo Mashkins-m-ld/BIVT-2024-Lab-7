@@ -239,7 +239,6 @@ namespace Lab_7
 
             public void Split(out Sportsman[] men, out Sportsman[] women)
             {
-                Console.WriteLine("===");
                 men = new Sportsman[0];
                 women = new Sportsman[0];
                 if (_sportsmen == null) return;

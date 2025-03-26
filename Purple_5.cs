@@ -20,6 +20,7 @@ namespace Lab_7
             private string _concept;
 
             private string[] _answers;
+            //private static int _answersRow;
 
 
             //свойства
@@ -47,7 +48,18 @@ namespace Lab_7
 
                 _answers = new string[] { animal, characterTrait, concept };
 
+                //string[,] copy = new string[_answers.GetLength(0)+1,3];
+
+                //copy[copy.GetLength(0) - 1, 0] = animal;
+                //copy[copy.GetLength(0)-1,1]=characterTrait;
+                //copy[copy.GetLength(0) - 1, 2] = concept;
+                //Array.Copy(copy, _answers, copy.Length);
             }
+
+            //static Response()
+            //{
+            //    _answers = new string[0, 0];
+            //}
 
             //методы
             public int CountVotes(Response[] responses, int questionNumber)
@@ -57,7 +69,7 @@ namespace Lab_7
                 foreach (Response response in responses)
                 {
                     if (response._answers == null) return 0;
-                    if (response._answers[questionNumber - 1] != null) count++;
+                    if (response._answers[questionNumber - 1] == _answers[questionNumber-1]) count++;
                 }
                 return count;
             }
@@ -98,7 +110,7 @@ namespace Lab_7
                     return default(Research);
                 }
 
-                Research newResearch = new Research($"No_{_researchId}_{DateTime.Now.Month}/{DateTime.Now.Year}");
+                Research newResearch = new Research($"No_{_researchId}_{DateTime.Now.Month:d2}/{DateTime.Now.Year}");
                 Array.Resize(ref _researches, _researches.Length + 1);
                 _researches[_researchId-1]=newResearch;
                 _researchId++;
@@ -109,96 +121,143 @@ namespace Lab_7
             public (string, double)[] GetGeneralReport(int question)
             {
                 if (_researches == null) return null;
+             
 
-                //общее количество непустых ответов
-                int count = 0;
-                for (int i = 0; i< _researches.Length; i++)
-                {
-                    count += (_researches[i].Responses[0].CountVotes(_researches[i].Responses, question));
-                }
+                //создать массив всех ответов из всех исследований 
+                Response[] all_responses= new Response[0];
 
-                //получить массив уникальных ответов
-                string[] answers = new string[0];
                 for (int i = 0; i < _researches.Length; i++)
                 {
                     for (int j = 0; j < _researches[i].Responses.Length; j++)
                     {
-                        if (question == 1 && _researches[i].Responses[j].Animal != null)
-                        {
-                            Array.Resize(ref answers, answers.Length + 1);
-                            answers[answers.Length - 1] = _researches[i].Responses[j].Animal;
-                        }
-                        else if (question == 2 && _researches[i].Responses[j].CharacterTrait != null)
-                        {
-                            Array.Resize(ref answers, answers.Length + 1);
-                            answers[answers.Length - 1] = _researches[i].Responses[j].CharacterTrait;
-
-                        }
-                        else if (question == 3 && _researches[i].Responses[j].Concept != null)
-                        {
-                            Array.Resize(ref answers, answers.Length + 1);
-                            answers[answers.Length - 1] = _researches[i].Responses[j].Concept;
-                        }
+                        Array.Resize(ref all_responses, all_responses.Length+1);
+                        all_responses[all_responses.Length - 1] = _researches[i].Responses[j];
                     }
                 }
 
-                string[] unic_answers = answers.Distinct().ToArray();
-
-                //создать и заполнить массив кортежей для ответа 
-
-                (string, double)[] result = new (string, double)[0];
-
-                for (int i = 0; i < unic_answers.Length; i++)
-                {
-                    int count_response = CountAllResonseInQuestion(unic_answers[i],question);
-                    (string, double) new_item = (unic_answers[i], (double)count_response / count * 100);
-                    Array.Resize(ref result, result.Length+1);
-                    result[result.Length - 1] = new_item;
-
-                }
-
-                return result;
-            }
-
-
-            private int CountAllResonseInQuestion(string response, int question)
-            {
-                if (_researches == null) return 0;
-
+                //посчитать количество непустых
                 int count = 0;
-                for (int r = 0; r < _researches.Length; r++)
+                for (int i = 0; i < all_responses.Length; i++)
                 {
-                    if (_researches[r].Responses == null) return 0;
-
                     if (question == 1)
                     {
-                        for (int i = 0; i < _researches[r].Responses.Length; i++)
+                        if (all_responses[i].Animal != null)
                         {
-
-                            if (_researches[r].Responses[i].Animal == response) count++;
+                            count++;
                         }
                     }
-                    else
+
+                    else if (question == 2)
                     {
-                        if (question == 2)
+                        if (all_responses[i].CharacterTrait != null)
                         {
-                            for (int i = 0; i < _researches[r].Responses.Length; i++)
-                            {
-
-                                if (_researches[r].Responses[i].CharacterTrait == response) count++;
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < _researches[r].Responses.Length; i++)
-                            {
-
-                                if (_researches[r].Responses[i].Concept == response) count++;
-                            }
+                            count++;
                         }
                     }
+                    else if (question == 3)
+                    {
+                        if (all_responses[i].Concept != null)
+                        {
+                            count++;
+
+                        }
+                    }
+
                 }
-                return count;
+                Console.WriteLine(count);
+
+                //кортеж и массив уникальных
+                (string, double)[] result = new (string, double)[0];
+                string[] unic=new string[0];
+
+                for (int i = 0; i < all_responses.Length; i++)
+                {
+                    if (question == 1)
+                    {
+                        if (all_responses[i].Animal != null)
+                        {
+                            bool fl = false;
+                            //поиск в уникальных
+                            for (int u = 0; u < unic.Length; u++)
+                            {
+                                if (unic[u] == all_responses[i].Animal)
+                                {
+                                    fl = true;
+                                    break;
+                                }
+                            }
+
+                            //если не нашли
+                            if (fl == false)
+                            {
+                                Array.Resize(ref unic, unic.Length + 1);
+                                unic[unic.Length - 1] = all_responses[i].Animal;
+                                Array.Resize(ref result, result.Length + 1);
+                                result[result.Length-1] = (all_responses[i].Animal,all_responses[i].CountVotes(all_responses, question)/(double)count*100);
+                            }
+                            
+                        }
+                    }
+
+                    else if (question == 2)
+                    {
+                        if (all_responses[i].CharacterTrait != null)
+                        {
+                            bool fl = false;
+                            //поиск в уникальных
+                            for (int u = 0; u < unic.Length; u++)
+                            {
+                                if (unic[u] == all_responses[i].CharacterTrait)
+                                {
+                                    fl = true;
+                                    break;
+                                }
+                            }
+
+                            //если не нашли
+                            if (fl == false)
+                            {
+                                Array.Resize(ref unic, unic.Length + 1);
+                                unic[unic.Length - 1] = all_responses[i].CharacterTrait;
+                                Array.Resize(ref result, result.Length + 1);
+                                result[result.Length -1] = (all_responses[i].CharacterTrait, (double)all_responses[i].CountVotes(all_responses, question) / count * 100);
+                               
+                            }
+                            
+                        }
+                    }
+                    else if (question == 3)
+                    {
+                        if (all_responses[i].Concept != null)
+                        {
+                            bool fl = false;
+                            //поиск в уникальных
+                            for (int u = 0; u < unic.Length; u++)
+                            {
+                                if (unic[u] == all_responses[i].Concept)
+                                {
+                                    fl = true;
+                                    break;
+                                }
+                            }
+
+                            //если не нашли
+                            if (fl == false)
+                            {
+                                Array.Resize(ref unic, unic.Length + 1);
+                                unic[unic.Length - 1] = all_responses[i].Concept;
+
+                                Array.Resize(ref result, result.Length + 1);
+                                result[result.Length - 1] = (all_responses[i].Concept, (double)all_responses[i].CountVotes(all_responses, question)/count * 100); 
+                            }
+
+                        }
+                    }
+
+                }
+
+             
+                return result;
             }
 
         }
