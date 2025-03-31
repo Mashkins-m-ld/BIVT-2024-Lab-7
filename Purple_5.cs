@@ -65,10 +65,10 @@ namespace Lab_7
             public int CountVotes(Response[] responses, int questionNumber)
             {
                 int count = 0;
-                if (responses == null || questionNumber < 1 || questionNumber > 3) return 0;
+                if (responses == null || questionNumber < 1 || questionNumber > 3 || _answers[questionNumber - 1]==null) return 0;
                 foreach (Response response in responses)
                 {
-                    if (response._answers == null) return 0;
+                    if (response.Equals(default(Response)) || response._answers == null) return 0;
                     if (response._answers[questionNumber - 1] == _answers[questionNumber-1]) count++;
                 }
                 return count;
@@ -302,7 +302,7 @@ namespace Lab_7
                     for (int i = 0, j = 0; i < _responses.Length; i++)
                     {
 
-                        if (_responses[i].Animal == null)
+                        if (_responses[i].Animal == null )
                         {
                             continue;
                         }
@@ -384,6 +384,7 @@ namespace Lab_7
                         }
                     }
                 }
+   
                 string[] answer;
                 if (unic_question_responses.Length > 5)
                 {

@@ -53,7 +53,7 @@ namespace Lab_7
 
             public void Jump(int distance, int[] marks, int target)
             {
-                if (_marks == null || marks == null) return;
+                if (_marks == null || marks == null || marks.Length<5) return;
                 _distance = distance;
 
                 for (int i = 0; i < _marks.Length; i++)

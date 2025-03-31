@@ -148,15 +148,17 @@ namespace Lab_7
             public Judge(string name, int[] marks)
             {
                 if (marks == null) return;
-
-                _name = name;
-
-                _marks = new int[marks.Length];
-
-                for (int i = 0; i < marks.Length; i++)
+                else
                 {
-                    _marks[i] = marks[i];
+                    _marks = new int[marks.Length];
+
+                    for (int i = 0; i < marks.Length; i++)
+                    {
+                        _marks[i] = marks[i];
+                    }
+
                 }
+                _name = name;
 
                 _markCounter = 0;
             }
@@ -164,7 +166,7 @@ namespace Lab_7
             //методы
             public int CreateMark()
             {
-                if (_marks == null) return 0;
+                if (_marks == null || _marks.Length == 0) return 0;
                 int result = _marks[_markCounter % _marks.Length];
                 _markCounter++;
                 return result;
@@ -196,24 +198,27 @@ namespace Lab_7
             public Competition(Judge[] judges)
             {
                 if (judges == null) return;
-
-                _judges = new Judge[7];
-
-                for (int i = 0; i < _judges.Length; i++)
+                else
                 {
-                    _judges[i] = judges[i];
+                    _judges = new Judge[judges.Length];
+
+                    for (int i = 0; i < _judges.Length; i++)
+                    {
+                        _judges[i] = judges[i];
+                    }
                 }
+
                 _participants = new Participant[0];
             }
 
             //методы
             public void Evaluate(Participant jumper)
             {
-                if (_judges == null) return;
+                if (_judges == null || _judges.Length < 7) return;
 
-                int[] marks = new int[_judges.Length];
+                int[] marks = new int[7];
 
-                for (int i = 0; i < _judges.Length; i++)
+                for (int i = 0; i < marks.Length; i++)
                 {
                     marks[i] = _judges[i].CreateMark();
                 }
