@@ -87,7 +87,7 @@ namespace Lab_7
 
             public void Jump(int[] marks)
             {
-                if (marks == null || _marks == null) return;
+                if (marks == null || _marks == null || marks.Length<7 || _jump>=4 ) return;
 
                 for (int i = 0; i < 7; i++)
                 {

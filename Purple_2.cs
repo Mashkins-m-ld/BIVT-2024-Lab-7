@@ -154,7 +154,7 @@ namespace Lab_7
 
             public void Jump(int distanse, int[] marks)
             {
-                if (_participants == null || marks==null) return;
+                if (_participants == null || marks==null || _participants.Length==0) return;
 
                 _participants[_jumperCount].Jump(distanse, marks, _standard);
                 _jumperCount++;
