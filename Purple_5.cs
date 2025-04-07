@@ -164,7 +164,7 @@ namespace Lab_7
                     }
 
                 }
-                Console.WriteLine(count);
+                //Console.WriteLine(count);
 
                 //кортеж и массив уникальных
                 (string, double)[] result = new (string, double)[0];
@@ -308,10 +308,7 @@ namespace Lab_7
                         }
                         question_responses[j] = _responses[i].Animal;
                         j++;
-                        if (i == _responses.Length - 1)
-                        {
-                            Array.Resize(ref question_responses, j);
-                        }
+         
                     }
                 }
                 else
@@ -327,10 +324,6 @@ namespace Lab_7
                             }
                             question_responses[j] = _responses[i].CharacterTrait;
                             j++;
-                            if (i == _responses.Length - 1)
-                            {
-                                Array.Resize(ref question_responses, j);
-                            }
                         }
                     }
                     else
@@ -344,13 +337,23 @@ namespace Lab_7
                             }
                             question_responses[j] = _responses[i].Concept;
                             j++;
-                            if (i == _responses.Length - 1)
-                            {
-                                Array.Resize(ref question_responses, j);
-                            }
+                
                         }
                     }
                 }
+
+                //обрезать хвост 
+                for (int i = 0; i < question_responses.Length;i++)
+                {
+                    if (question_responses[i]==null) Array.Resize(ref question_responses, i);
+                }
+
+                //foreach (string s in question_responses)
+                //{
+                //    Console.WriteLine(s);
+                //}
+                //Console.WriteLine("==");
+
                 string[] unic_question_responses = question_responses.Distinct().ToArray();
 
 

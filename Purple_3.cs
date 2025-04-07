@@ -85,21 +85,30 @@ namespace Lab_7
 
                     //сортировка
                     Array.Sort(marks_per_judge);
+                    Array.Reverse(marks_per_judge);
+
+                    //массив флагов проставления оценки у этого судьи участников 
+                    //bool[] fl = new bool[participants.Length]
 
                     // итерация по marks_per_judge/по участникам всем
                     for (int j = 0; j < marks_per_judge.Length; j++)//все оценки у судьи по возрастанию
                     {
-                        for (int k = 0; k < participants.Length; k++)
+     
+                        for (int k = 0; k < participants.Length; k++)//по участникам 
                         {
                             if (participants[k].Marks == null) return;
-                            if (marks_per_judge[j] == participants[k].Marks[i])
+                            if (marks_per_judge[j] == participants[k].Marks[i] && participants[k]._places[i]==0) //место ещё не пров
                             {
-                                participants[k]._places[i] = participants.Length - j;
+                                participants[k]._places[i] = j+1;
+                                break;
                             }
                         }
                     }
                 }
                 //ну вроде как места проставили 
+
+
+                
 
                 //*проставить сумму мест для каждого партиспанта 
                 for (int i = 0; i < participants.Length; i++)
@@ -123,6 +132,9 @@ namespace Lab_7
 
                     }
                 }
+
+                
+                
             }
             public static void Sort(Participant[] array)
             {
@@ -185,7 +197,7 @@ namespace Lab_7
                 }
 
                 _participants = new Participant[0];
-                ModificateMood();
+                //ModificateMood();
 
                 _skaterCounter = 0;
             }
@@ -199,6 +211,7 @@ namespace Lab_7
                 for (int i = 0; i< 7; i++)
                 {
                     _participants[_skaterCounter].Evaluate(marks[i] * _moods[i]);
+                    //_participants[_skaterCounter].Evaluate(marks[i]);
 
                 }
                 _skaterCounter++;
