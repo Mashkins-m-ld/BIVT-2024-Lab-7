@@ -85,16 +85,14 @@ namespace Lab_7
 
                     //сортировка
                     Array.Sort(marks_per_judge);
-                    Array.Reverse(marks_per_judge);
+                   
 
-                    //массив флагов проставления оценки у этого судьи участников 
-                    //bool[] fl = new bool[participants.Length]
-
+                  
                     // итерация по marks_per_judge/по участникам всем
                     for (int j = 0; j < marks_per_judge.Length; j++)//все оценки у судьи по возрастанию
                     {
      
-                        for (int k = 0; k < participants.Length; k++)//по участникам 
+                        for (int k = 0; k< participants.Length; k++)//по участникам 
                         {
                             if (participants[k].Marks == null) return;
                             if (marks_per_judge[j] == participants[k].Marks[i] && participants[k]._places[i]==0) //место ещё не пров
@@ -197,7 +195,7 @@ namespace Lab_7
                 }
 
                 _participants = new Participant[0];
-                //ModificateMood();
+                ModificateMood();
 
                 _skaterCounter = 0;
             }
