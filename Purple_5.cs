@@ -112,7 +112,7 @@ namespace Lab_7
 
                 Research newResearch = new Research($"No_{_researchId}_{DateTime.Now.Month:d2}/{DateTime.Now.Year}");
                 Array.Resize(ref _researches, _researches.Length + 1);
-                _researches[_researchId-1]=newResearch;
+                _researches[_researches.Length - 1] =newResearch;
                 _researchId++;
                 return newResearch;
                 

@@ -232,7 +232,7 @@ namespace Lab_7
                 Console.WriteLine(_name);
                 foreach (Sportsman i in _sportsmen)
                 {
-                    Console.WriteLine($"{i.Name} {i.Surname} {i.Time}");
+                    Console.WriteLine($"{i.Name} {i.Surname} {i.Time} {i is SkiMan}");
                 }
 
             }
@@ -267,31 +267,63 @@ namespace Lab_7
 
                 int menIndex = 0, womenIndex = 0, index =0;
 
-                while (menIndex < men.Length || womenIndex < women.Length)
+                if (men[0].Time <= women[0].Time) //если мужчина быстрее 
                 {
-                    if (menIndex < men.Length & womenIndex < women.Length)
+                    while (menIndex < men.Length || womenIndex < women.Length)
                     {
-                        _sportsmen[index] = men[menIndex];
-                        index++;
-                        menIndex++;
-                        _sportsmen[index] = women[womenIndex];
-                        index++;
-                        womenIndex++;
+                        if (menIndex < men.Length & womenIndex < women.Length)
+                        {
+                            _sportsmen[index] = men[menIndex];
+                            index++;
+                            menIndex++;
+                            _sportsmen[index] = women[womenIndex];
+                            index++;
+                            womenIndex++;
+                        }
+                        else if (menIndex < men.Length)
+                        {
+                            _sportsmen[index] = men[menIndex];
+                            index++;
+                            menIndex++;
+                        }
+                        else
+                        {
+                            _sportsmen[index] = women[womenIndex];
+                            index++;
+                            womenIndex++;
+                        }
+
                     }
-                    else if (menIndex < men.Length)
-                    {
-                        _sportsmen[index] = men[menIndex];
-                        index++;
-                        menIndex++;
-                    }
-                    else
-                    {
-                        _sportsmen[index] = women[womenIndex];
-                        index++;
-                        womenIndex++;
-                    }
-                    
                 }
+                else
+                {
+                    while (menIndex < men.Length || womenIndex < women.Length)
+                    {
+                        if (menIndex < men.Length & womenIndex < women.Length)
+                        {
+                            _sportsmen[index] = women[womenIndex];
+                            index++;
+                            womenIndex++;
+                            _sportsmen[index] = men[menIndex];
+                            index++;
+                            menIndex++;
+                        }
+                        else if (menIndex < men.Length)
+                        {
+                            _sportsmen[index] = men[menIndex];
+                            index++;
+                            menIndex++;
+                        }
+                        else
+                        {
+                            _sportsmen[index] = women[womenIndex];
+                            index++;
+                            womenIndex++;
+                        }
+
+                    }
+                }
+                
 
             }
 
