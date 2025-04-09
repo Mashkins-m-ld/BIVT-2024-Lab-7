@@ -95,6 +95,13 @@ namespace Lab_7
 
                 }
 
+                // проставить сумму мест для каждого партиспанта
+                for (int i = 0; i < participants.Length; i++)
+                {
+                    if (participants[i]._places == null) return;
+                    participants[i]._placesSum = participants[i]._places.Sum();
+                }
+
                 //    скопировать оценки одного i-того судьи для всех участников
                 //    double[] marks_per_judge = new double[participants.Length];
                 //    int count = 0;
@@ -130,12 +137,7 @@ namespace Lab_7
 
 
 
-                //* проставить сумму мест для каждого партиспанта
-                //for (int i = 0; i < participants.Length; i++)
-                //{
-                //    if (participants[i]._places == null) return;
-                //    participants[i]._placesSum = participants[i]._places.Sum();
-                //}
+
 
                 //сортировка participants
                 //for (int i = 0; i < participants.Length - 1; i++)
