@@ -120,8 +120,8 @@ namespace Lab_7
 
             public (string, double)[] GetGeneralReport(int question)
             {
-                if (_researches == null) return null;
-             
+                if (_researches == null || question<1 || question>3) return null;
+              
 
                 //создать массив всех ответов из всех исследований 
                 Response[] all_responses= new Response[0];

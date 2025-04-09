@@ -73,66 +73,86 @@ namespace Lab_7
 
                 for (int i = 0; i < 7; i++) //интерация по судьям
                 {
-                    //скопировать оценки одного i-того судьи для всех участников
-                    double[] marks_per_judge = new double[participants.Length];
-                    int count = 0;
+                    //отсортировать по оценкам у i-того судьи пузырьком
                     for (int j = 0; j < participants.Length; j++)
                     {
-                        if (participants[j].Marks == null) return;
-                        marks_per_judge[count] = participants[j].Marks[i];
-                        count++;
-                    }
-
-                    //сортировка
-                    Array.Sort(marks_per_judge);
-                   
-
-                  
-                    // итерация по marks_per_judge/по участникам всем
-                    for (int j = 0; j < marks_per_judge.Length; j++)//все оценки у судьи по возрастанию
-                    {
-     
-                        for (int k = 0; k< participants.Length; k++)//по участникам 
+                        for (int k = 0; k < participants.Length - 1 - j; k++)
                         {
-                            if (participants[k].Marks == null) return;
-                            if (marks_per_judge[j] == participants[k].Marks[i] && participants[k]._places[i]==0) //место ещё не пров
+                            if (participants[k + 1].Marks[i] > participants[k].Marks[i])
                             {
-                                participants[k]._places[i] = j+1;
-                                break;
+                                Participant copy = participants[k + 1];
+                                participants[k + 1] = participants[k];
+                                participants[k] = copy;
                             }
                         }
                     }
+
+                    //проставить места 
+                    for (int j = 0; j < participants.Length; j++)
+                    {
+                        participants[j]._places[i] = j + 1;
+                    }
+
                 }
-                //ну вроде как места проставили 
+
+                //    скопировать оценки одного i-того судьи для всех участников
+                //    double[] marks_per_judge = new double[participants.Length];
+                //    int count = 0;
+                //    for (int j = 0; j < participants.Length; j++)
+                //    {
+                //        if (participants[j].Marks == null) return;
+                //        marks_per_judge[count] = participants[j].Marks[i];
+                //        count++;
+                //    }
+
+                //    сортировка
+                //    Array.Sort(marks_per_judge);
 
 
-                
 
-                //*проставить сумму мест для каждого партиспанта 
-                for (int i = 0; i < participants.Length; i++)
-                {
-                    if (participants[i]._places == null) return;
-                    participants[i]._placesSum = participants[i]._places.Sum();
-                }
+                //    итерация по marks_per_judge / по участникам всем
+                //    for (int j = 0; j < marks_per_judge.Length; j++)//все оценки у судьи по возрастанию
+                //    {
+
+                //        for (int k = 0; k < participants.Length; k++)//по участникам 
+                //        {
+                //            if (participants[k].Marks == null) return;
+                //            if (marks_per_judge[j] == participants[k].Marks[i] && participants[k]._places[i] == 0) //место ещё не пров
+                //            {
+                //                participants[k]._places[i] = j + 1;
+                //                break;
+                //            }
+                //        }
+                //    }
+                //}
+                //ну вроде как места проставили
+
+
+
+
+                //* проставить сумму мест для каждого партиспанта
+                //for (int i = 0; i < participants.Length; i++)
+                //{
+                //    if (participants[i]._places == null) return;
+                //    participants[i]._placesSum = participants[i]._places.Sum();
+                //}
 
                 //сортировка participants
-                for (int i = 0; i < participants.Length - 1; i++)
-                {
-                    for (int j = 0; j < participants.Length - 1 - i; j++)
-                    {
-                        if (participants[j]._places == null) return;
-                        if (participants[j]._places[6] > participants[j + 1]._places[6])
-                        {
-                            Participant copy = participants[j + 1];
-                            participants[j + 1] = participants[j];
-                            participants[j] = copy;
-                        }
+                //for (int i = 0; i < participants.Length - 1; i++)
+                //{
+                //    for (int j = 0; j < participants.Length - 1 - i; j++)
+                //    {
+                //        if (participants[j]._places == null) return;
+                //        if (participants[j]._places[6] > participants[j + 1]._places[6])
+                //        {
+                //            Participant copy = participants[j + 1];
+                //            participants[j + 1] = participants[j];
+                //            participants[j] = copy;
+                //        }
 
-                    }
-                }
+                //    }
+                //}
 
-                
-                
             }
             public static void Sort(Participant[] array)
             {
